@@ -9,7 +9,9 @@ from core.services.client import ClientService
 from core.services.message import MessageService
 from core.services.exceptions import BadAuthToken, Response400Error
 
-
+#########
+# нужен рефакторинг. таски и сервис здесь вместе из-за проблемы с цикл. импортом
+#########
 class SendMessageTask(Task):
     def on_success(self, return_value, task_id, args, kwargs):
         _, _, _, mailing_id = args
