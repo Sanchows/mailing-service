@@ -1,5 +1,6 @@
 # mailing-service
-
+## Disclaimer
+I wanted to show I know and I can. It requires a refactoring. Code is not an ideal.  Thanks :)
 ## Stack
 Python3.10, Django Rest Framework, PostgreSQL, Celery, Redis, Prometheus, Grafana.
 
