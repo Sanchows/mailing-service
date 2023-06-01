@@ -23,7 +23,7 @@ This should create and run docker containers such as:
 7. Grafana (http://127.0.0.1:3000)
 
 ## How to use
-1. To access the Admin panel, you need create a superuser. Open terminal and enter to the root directory of project. Then:
+1. To access the Admin panel, you need create a superuser. Open the terminal in a new tab and enter into docker container, then create a superuser:
 ```
 docker exec -it mailing-service_webapp_1 sh
 ./manage.py createsuperuser
