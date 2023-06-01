@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'drf_yasg',
 
     'core.apps.CoreConfig',
+    'mailing_statistics.apps.MailingStatisticsConfig'
 ]
 
 MIDDLEWARE = [
