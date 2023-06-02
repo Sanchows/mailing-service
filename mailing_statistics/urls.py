@@ -2,12 +2,12 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
 from mailing_statistics.views import (
-    MessagesView, MessagesClientView, MessagesClientByStatusView
+    MessageView, MessagesClientView, MessagesClientByStatusView
 )
 
 
 api_router = DefaultRouter()
-api_router.register('message', MessagesView, basename='message')
+api_router.register('message', MessageView, basename='message')
 
 urlpatterns = [
     path('',
