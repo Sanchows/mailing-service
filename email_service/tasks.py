@@ -1,15 +1,28 @@
-from django.core.mail import send_mail
+from datetime import timedelta
+
 from celery import shared_task
-from core.services.mailing import MailingService
+from django.utils import timezone
 from django.conf import settings
+from django.template.loader import get_template
+from django.core.mail import EmailMessage
+
+from core.models import Mailing
+
 
 @shared_task
 def send_daily_email():
-    message = MailingService.get_info_about_mailings()
-    send_mail(
+    now = timezone.now()
+    mailings = Mailing.objects.filter(end_at__gt=now - timedelta(days=1))
+
+    context = {
+        'mailings': mailings
+    }
+    body = get_template('daily_mail.html').render(context)
+    message = EmailMessage(
         subject='Статистика по обработанным рассылкам',
-        message=message,
+        body=body,
         from_email=settings.EMAIL_HOST_USER,
-        recipient_list=[settings.EMAIL_HOST_USER],
-        fail_silently=False,
+        to=[settings.EMAIL_HOST_USER, "dorozhko.margarita@gmail.com"],
     )
+    message.content_subtype = "html"
+    message.send()

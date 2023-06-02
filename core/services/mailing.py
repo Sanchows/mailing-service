@@ -1,4 +1,3 @@
-from datetime import datetime
 from celery import Task, shared_task
 from django.conf import settings
 from django.utils import timezone
@@ -92,11 +91,6 @@ class MailingService:
         self._start_mailing(clients=clients)
         print(clients)
 
-    @staticmethod
-    def get_info_about_mailings():
-        today_queryset = Mailing.objects.all()
-        print(today_queryset)
-    
     def _start_mailing(self, clients):
         self.mailing_instance.status = Mailing.Status.PROCESSING
         for client in clients:

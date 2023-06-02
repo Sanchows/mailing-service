@@ -48,7 +48,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -110,8 +110,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+STATIC_ROOT = BASE_DIR / 'static'
+MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
 # Default primary key field type
@@ -136,12 +136,13 @@ REST_FRAMEWORK = {
 
 PROBE_MAILING_SERVER_TOKEN = os.environ.get('PROBE_MAILING_SERVER_TOKEN')
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT'))
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
-EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL')
+EMAIL_USE_TLS = int(os.environ.get('EMAIL_USE_TLS')) in (1,)
+EMAIL_USE_SSL = int(os.environ.get('EMAIL_USE_SSL')) in (1,)
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
@@ -150,6 +151,6 @@ CELERY_RESULT_BACKEND = 'redis://redis:6379'
 CELERY_BEAT_SCHEDULE = {
     'send_daily_email': {
         'task': 'email_service.tasks.send_daily_email',
-        'schedule': crontab(hour=10, minute=39),  # Запускать ежедневно в 12:00
+        'schedule': crontab(hour=10, minute=00),  # Запускать ежедневно в 10:00
     },
 }

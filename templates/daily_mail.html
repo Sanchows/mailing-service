@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<htmllang="en">
+  <head>
+    <metacharset="UTF-8"/>
+    <metaname="viewport"content="width=device-width, initial-scale=1.0"/>
+    <title>Daily statistics about mailings</title>
+  </head>
+  <body>
+    Статистика по рассылкам, которые завершились за последние 24 часа.
+    {% for mailing in mailings %}
+        <h4>----</h4>
+        <p>Номер рассылки: {{ mailing.id }}</p>
+        <p>Начало рассылки: {{ mailing.start_at }}</p>
+        <p>Конец рассылки: {{ mailing.end_at }}</p>
+        <p>Статус: {{ mailing.status }}</p>
+    {% endfor %}
+  </body>
+</html>
