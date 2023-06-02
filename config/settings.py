@@ -1,5 +1,7 @@
 import os
 from pathlib import Path
+from celery.schedules import crontab
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +27,8 @@ INSTALLED_APPS = [
     'drf_yasg',
 
     'core.apps.CoreConfig',
-    'mailing_statistics.apps.MailingStatisticsConfig'
+    'mailing_statistics.apps.MailingStatisticsConfig',
+    'email_service.apps.EmailServiceConfig',
 ]
 
 MIDDLEWARE = [
@@ -131,6 +134,13 @@ REST_FRAMEWORK = {
     ),
 }
 
+PROBE_MAILING_SERVER_TOKEN = os.environ.get('PROBE_MAILING_SERVER_TOKEN')
+
 CELERY_BROKER_URL = 'redis://redis:6379'
 CELERY_RESULT_BACKEND = 'redis://redis:6379'
-PROBE_MAILING_SERVER_TOKEN = os.environ.get('PROBE_MAILING_SERVER_TOKEN')
+CELERY_BEAT_SCHEDULE = {
+    'send_daily_email': {
+        'task': 'email_service.tasks.send_daily_email',
+        'schedule': crontab(hour=10, minute=39),  # Запускать ежедневно в 12:00
+    },
+}

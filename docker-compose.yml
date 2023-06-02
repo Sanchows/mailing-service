@@ -43,6 +43,8 @@ services:
     env_file:
       - ./.env
     command: ['celery', '--workdir=./', '-A', 'config', 'worker']
+    depends_on:
+      - redis
 
   flower:
     build:
@@ -52,6 +54,20 @@ services:
       - "5555:5555"
     env_file:
       - ./.env
+    depends_on:
+      - redis
+      - worker
+
+  celery-beat:
+    build: 
+      context: .
+    command: ['celery', '--workdir=./', '-A', 'config', 'beat', '-l', 'info']
+    env_file:
+      - ./.env
+    depends_on:
+      - redis
+      - worker
+      - flower
 
   prometheus:
     image: prom/prometheus
@@ -59,13 +75,20 @@ services:
       - "9090:9090"
     volumes:
       - "./prometheus.yml:/etc/prometheus/prometheus.yml"
-  
+    depends_on:
+      - redis
+      - worker
+
   grafana:
     image: grafana/grafana
     ports:
       - "3000:3000"
     volumes:
       - grafana-storage:/var/lib/grafana
+    depends_on:
+      - redis
+      - worker
+
 volumes:
   postgresql-mailing-service:
   grafana-storage:

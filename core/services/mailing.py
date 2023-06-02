@@ -92,6 +92,10 @@ class MailingService:
         self._start_mailing(clients=clients)
         print(clients)
 
+    def get_info_about_mailings(self):
+        today_queryset = Mailing.objects.all()
+        print(statistics_for_today)
+    
     def _start_mailing(self, clients):
         self.mailing_instance.status = Mailing.Status.PROCESSING
         for client in clients:
