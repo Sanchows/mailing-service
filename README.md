@@ -5,7 +5,7 @@ I wanted to show that I know and I can. It requires a refactoring. The code is n
 Python3.10, Django Rest Framework, PostgreSQL, Celery, Redis, Prometheus, Grafana.
 
 ## Additional features
-Numbers: 3, 5, 6(django admin), 10(partially)
+Numbers: 3, 5, 6(django admin), 8, 10(partially)
 
 ## Getting started
 
