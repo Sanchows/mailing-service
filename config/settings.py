@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
-from celery.schedules import crontab
 
+from celery.schedules import crontab
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -150,6 +150,10 @@ SPECTACULAR_SETTINGS = {
         'MessageStatusEnum': "core.models.Message.Status",
         'MailingStatusEnum': "core.models.Mailing.Status",
     },
+    "SWAGGER_UI_SETTINGS": {
+        "filter": True,  # включить поиск по тегам
+    },
+    "COMPONENT_SPLIT_REQUEST": True
 }
 
 PROBE_MAILING_SERVER_TOKEN = os.environ.get('PROBE_MAILING_SERVER_TOKEN')
