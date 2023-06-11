@@ -173,6 +173,6 @@ CELERY_RESULT_BACKEND = 'redis://redis:6379'
 CELERY_BEAT_SCHEDULE = {
     'send_daily_email': {
         'task': 'email_service.tasks.send_daily_email',
-        'schedule': crontab(hour=10, minute=00),
+        'schedule': crontab(hour="10", minute="00"),
     },
 }
