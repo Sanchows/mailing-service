@@ -22,7 +22,7 @@ def send_daily_email():
         subject='Статистика по обработанным рассылкам',
         body=body,
         from_email=settings.EMAIL_HOST_USER,
-        to=[settings.EMAIL_HOST_USER, "dorozhko.margarita@gmail.com"],
+        to=[settings.EMAIL_HOST_USER],
     )
     message.content_subtype = "html"
     message.send()
