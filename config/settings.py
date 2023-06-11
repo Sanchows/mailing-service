@@ -24,11 +24,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'drf_yasg',
 
     'core.apps.CoreConfig',
     'mailing_statistics.apps.MailingStatisticsConfig',
     'email_service.apps.EmailServiceConfig',
+
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -132,17 +133,27 @@ REST_FRAMEWORK = {
         'djangorestframework_camel_case.parser.CamelCaseMultiPartParser',
         'djangorestframework_camel_case.parser.CamelCaseJSONParser',
     ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+   'TITLE': 'Mailing Service',
+   'VERSION': '1.0.0',
+   'ENUM_NAME_OVERRIDES': {
+        'MessageStatusEnum': "core.models.Message.Status",
+        'MailingStatusEnum': "core.models.Mailing.Status",
+    },
 }
 
 PROBE_MAILING_SERVER_TOKEN = os.environ.get('PROBE_MAILING_SERVER_TOKEN')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_PORT = int(os.environ.get('EMAIL_PORT'))
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 25))
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
-EMAIL_USE_TLS = int(os.environ.get('EMAIL_USE_TLS')) in (1,)
-EMAIL_USE_SSL = int(os.environ.get('EMAIL_USE_SSL')) in (1,)
+EMAIL_USE_TLS = int(os.environ.get('EMAIL_USE_TLS', 1)) in (1,)
+EMAIL_USE_SSL = int(os.environ.get('EMAIL_USE_SSL', 0)) in (1,)
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
