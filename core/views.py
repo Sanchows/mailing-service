@@ -3,13 +3,9 @@ from rest_framework import viewsets
 
 from base import classes
 from core.models import Client, Mailing
-from core.serializers import (
-    ClientSerializer,
-    CreateClientSerializer,
-    CreateMailingSerializer,
-    MailingSerializer,
-    UpdateMailingSerializer,
-)
+from core.serializers import (ClientSerializer, CreateClientSerializer,
+                              CreateMailingSerializer, MailingSerializer,
+                              UpdateMailingSerializer)
 
 
 @extend_schema(tags=["Mailings"])
@@ -45,7 +41,7 @@ class MailingViewSet(classes.MixedSerializer, viewsets.ModelViewSet):
         'update': UpdateMailingSerializer,
         'destroy': MailingSerializer,
         'list': MailingSerializer,
-        'retrieve': UpdateMailingSerializer,
+        'retrieve': MailingSerializer,
         'partial_update': UpdateMailingSerializer,
     }
 
