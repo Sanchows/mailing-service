@@ -83,16 +83,20 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation'
+                '.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation'
+                '.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation'
+                '.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation'
+                '.NumericPasswordValidator',
     },
 ]
 
@@ -120,10 +124,13 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_HOSTS', 'http://127.0.0.1:8000').split(' ')
+CORS_ALLOWED_ORIGINS = os.environ.get(
+    'CORS_ALLOWED_HOSTS',
+    'http://127.0.0.1:8000').split(' ')
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination'
+                                '.LimitOffsetPagination',
     'DEFAULT_RENDERER_CLASSES': (
         'djangorestframework_camel_case.render.CamelCaseJSONRenderer',
         'djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer',
@@ -137,9 +144,9 @@ REST_FRAMEWORK = {
 }
 
 SPECTACULAR_SETTINGS = {
-   'TITLE': 'Mailing Service',
-   'VERSION': '1.0.0',
-   'ENUM_NAME_OVERRIDES': {
+    'TITLE': 'Mailing Service',
+    'VERSION': '1.0.0',
+    'ENUM_NAME_OVERRIDES': {
         'MessageStatusEnum': "core.models.Message.Status",
         'MailingStatusEnum': "core.models.Mailing.Status",
     },
@@ -162,6 +169,6 @@ CELERY_RESULT_BACKEND = 'redis://redis:6379'
 CELERY_BEAT_SCHEDULE = {
     'send_daily_email': {
         'task': 'email_service.tasks.send_daily_email',
-        'schedule': crontab(hour=10, minute=00),  # Запускать ежедневно в 10:00
+        'schedule': crontab(hour=10, minute=00),
     },
 }

@@ -8,7 +8,7 @@ class ClientService:
 
     @staticmethod
     def get_clients(**kwargs):
-        return Client.objects.filter(
-            Q(code__in=kwargs['codes']) &
-            Q(tags__in=kwargs['tags'])
+        return Client.objects.filter((
+            Q(code__in=kwargs['codes'])
+            & Q(tags__in=kwargs['tags']))
         )

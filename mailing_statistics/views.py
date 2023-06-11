@@ -28,9 +28,7 @@ class MessageView(generics.ListAPIView,
     queryset = Message.objects.all()
 
 
-@extend_schema(tags=["Messages"],
-               
-)
+@extend_schema(tags=["Messages"],)
 @extend_schema_view(
     list=extend_schema(
         operation_id="ClientMessagesByClientId",
@@ -60,7 +58,7 @@ class MessagesClientByStatusView(generics.ListAPIView):
 
     @extend_schema(
         operation_id="ClientMessagesByClientIdAndStatus",
-        summary="""Получить список всех сообщений определенного 
+        summary="""Получить список всех сообщений определенного
                    статуса по ID клиента""",
         description="""Получить список всех сообщений клиента
                     по ID клиента и статусу сообщения""",)

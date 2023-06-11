@@ -1,4 +1,3 @@
-from django.db.models.query import Q
 from core.models import Message
 
 

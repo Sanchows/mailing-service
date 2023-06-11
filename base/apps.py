@@ -4,7 +4,6 @@ from django.contrib import admin
 
 class BaseAppConfig(AppConfig):
     def ready(self):
-        import core.signals
         # Automatically register in admin all models
         # importing from here to not face error - apps not loaded yet
 

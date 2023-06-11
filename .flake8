@@ -4,4 +4,5 @@ exclude =
     .git
     **migrations**
     __init__.py
-max-line-length=79
+max-line-length = 79
+ignore = F401, W503

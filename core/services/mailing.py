@@ -8,8 +8,9 @@ from core.services.client import ClientService
 from core.services.message import MessageService
 from core.services.exceptions import BadAuthToken, Response400Error
 
+
 #########
-# нужен рефакторинг. таски и сервис здесь вместе из-за проблемы с цикл. импортом
+# нужен рефакторинг. таски и сервис здесь вместе из-за проблемы с цикл.импортом
 #########
 class SendMessageTask(Task):
     def on_success(self, return_value, task_id, args, kwargs):
@@ -73,7 +74,8 @@ class MailingService:
 
     @staticmethod
     def set_finish_if_all_messages_have_been_done(mailing_id):
-        """Set FINISH status if all messages of this mailing have 'SENT' or 'FAILED'
+        """Set FINISH status
+        if all messages of this mailing have 'SENT' or 'FAILED'
         """
         unsent_messages = MessageService.get_unsent_messages_by_mailing_id(
             mailing_id=mailing_id

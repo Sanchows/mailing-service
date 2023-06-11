@@ -1,14 +1,16 @@
-from datetime import timedelta
 import uuid
-from django.utils import timezone
-import pytz
 
 from django.core.exceptions import ValidationError
 from django.core.validators import (
-    MaxLengthValidator, MinLengthValidator, RegexValidator
+    MaxLengthValidator,
+    MinLengthValidator,
+    RegexValidator,
 )
 from django.db import models
 from django.db.models.query import F, Q
+from django.utils import timezone
+import pytz
+
 from base.choices import BaseTextChoices
 
 
