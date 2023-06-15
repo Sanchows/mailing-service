@@ -29,7 +29,7 @@ This should create and run docker containers such as:
 docker exec -it mailing-service_webapp_1 sh
 ./manage.py createsuperuser
 ```
-2. You can see on the API documentation http://127.0.0.1:8000/swagger/
+2. You can see on the API documentation http://127.0.0.1:8000/api/docs/
 3. Before creating a client or a maling, you need to create some tags and mobile operator's codes by using the Admin panel http://127.0.0.1:8000/admin
 4. Then, try to use an API through Swagger.
 
