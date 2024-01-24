@@ -1,4 +1,4 @@
-# mailing-service
+# mailing-service (Test Task)
 ## Disclaimer
 I wanted to show that I know and I can. It requires a refactoring. The code is not perfect.  Thanks :)
 ## Stack
